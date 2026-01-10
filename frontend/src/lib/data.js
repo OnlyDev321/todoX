@@ -1,25 +1,25 @@
 export const FilterType = {
-  all: "Tất cả",
-  active: "Đang làm",
-  completed: "Hoàn thành",
+  all: "All",
+  active: "Active",
+  completed: "Completed",
 };
 
 export const options = [
   {
     value: "today",
-    label: "Hôm nay",
+    label: "Today",
   },
   {
     value: "week",
-    label: "Tuần này",
+    label: "This Week",
   },
   {
     value: "month",
-    label: "Tháng này",
+    label: "This Month",
   },
   {
     value: "all",
-    label: "Tất cả",
+    label: "All",
   },
 ];
 

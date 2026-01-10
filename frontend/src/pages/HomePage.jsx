@@ -8,8 +8,9 @@ import TaskListPagination from "@/components/TaskListPagination";
 import { useEffect } from "react";
 import { useState } from "react";
 import { toast } from "sonner";
-import api from "@/lib/axios";
+import api from "@/services/axios";
 import { visibleTaskLimit } from "@/lib/data";
+import Logout from "@/components/auth/Logout";
 
 const HomePage = () => {
   const [taskBuffer, setTasksBuffer] = useState([]);
@@ -34,8 +35,8 @@ const HomePage = () => {
       setActiveTaskCount(res.data.activeCount);
       setCompleteTaskCount(res.data.completeCount);
     } catch (error) {
-      console.error("Lỗi xảy ra khi truy xuất tasks:", error);
-      toast.error("Lỗi xảy ra khi truy xuất tasks.");
+      console.error("ERROR When Query tasks:", error);
+      toast.error("ERROR When Query tasks.");
     }
   };
 
@@ -96,8 +97,14 @@ const HomePage = () => {
       {/* Your Content/Components */}
       <div className="container pt-8 mx-auto relative z-10">
         <div className="w-full max-w-2xl mx-auto space-y-6 p-6">
-          {/* dau trang */}
-          <Header />
+          <div className="flex items-center">
+            {/* dau trang */}
+            <div className="flex-1">
+              <Header />
+            </div>
+            {/* Log out Button  */}
+            <Logout />
+          </div>
           {/* tao nhiem vu  */}
           <AddTask handleNewTaskAdded={handleTaskChanged} />
           {/* thong ke va bo loc */}

@@ -8,12 +8,14 @@ const NotFound = () => {
         alt="Not found"
         className="max-w-full mb-6 w-96"
       />
-      <p className="text-xl font-semibold">Ban dang di vao vung cam dia 🚫</p>
+      <p className="text-xl font-semibold">
+        You are entering a restricted area.🚫
+      </p>
       <a
         href="/"
         className="inline-block px-6 py-3 mt-6 font-medium text-white transition shadow-md bg-primary rounded-2xl hover:bg-primary-dark"
       >
-        Quay ve trang chu
+        Back to home
       </a>
     </div>
   );

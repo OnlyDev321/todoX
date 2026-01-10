@@ -2,6 +2,12 @@ import mongoose from "mongoose";
 
 const taskSchema = new mongoose.Schema(
   {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+      index: true, // Tạo index để query nhanh hơn
+    },
     title: {
       type: String,
       required: true,

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_CONNECTIONSRING);
+    await mongoose.connect(process.env.MONGODB_CONNECTIONSTRING);
     console.log("lien ket CSDL thanh cong!");
   } catch (error) {
     console.log("loi khi ket noi CSDL:", error);

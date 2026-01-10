@@ -23,7 +23,11 @@ export const getAllTasks = async (req, res) => {
       break;
   }
 
-  const query = startDate ? { createdAt: { $gte: startDate } } : {};
+  // Lọc tasks theo userId của user đã đăng nhập
+  const baseQuery = { userId: req.user._id };
+  const query = startDate
+    ? { ...baseQuery, createdAt: { $gte: startDate } }
+    : baseQuery;
 
   try {
     // loc
@@ -53,7 +57,11 @@ export const getAllTasks = async (req, res) => {
 export const createTask = async (req, res) => {
   try {
     const { title } = req.body;
-    const task = new Task({ title });
+    // Tạo task với userId của user đã đăng nhập
+    const task = new Task({
+      title,
+      userId: req.user._id,
+    });
 
     const newTask = await task.save();
     res.status(201).json(newTask);
@@ -66,8 +74,9 @@ export const createTask = async (req, res) => {
 export const updateTask = async (req, res) => {
   try {
     const { title, status, completedAt } = req.body;
-    const updatedTask = await Task.findByIdAndUpdate(
-      req.params.id,
+    // Chỉ cho phép update task của chính user đó
+    const updatedTask = await Task.findOneAndUpdate(
+      { _id: req.params.id, userId: req.user._id },
       {
         title,
         status,
@@ -80,7 +89,7 @@ export const updateTask = async (req, res) => {
       return res.status(404).json({ message: "nhiem vu ko ton tai" });
     }
 
-    res.status(200).json(updateTask);
+    res.status(200).json(updatedTask);
   } catch (error) {
     console.log("Loi khi goi updateTask", error);
     res.status(500).json({ message: "Loi he thong" });
@@ -89,14 +98,17 @@ export const updateTask = async (req, res) => {
 
 export const deleteTasks = async (req, res) => {
   try {
-    const deleteTask = await Task.findByIdAndDelete(req.params.id);
+    // Chỉ cho phép xóa task của chính user đó
+    const deleteTask = await Task.findOneAndDelete({
+      _id: req.params.id,
+      userId: req.user._id,
+    });
     if (!deleteTask) {
       return res.status(404).json({ message: "Nhiem vu khong ton tai" });
     }
     res.status(200).json(deleteTask);
   } catch (error) {
-    console.error("loio khi goi deleteTask", error);
+    console.error("loi khi goi deleteTask", error);
     res.status(500).json({ message: "loi he thong" });
-    console.error();
   }
 };

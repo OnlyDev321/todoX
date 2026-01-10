@@ -7,7 +7,7 @@ import { Input } from "./ui/input";
 import { Calendar } from "lucide-react";
 import { SquarePen } from "lucide-react";
 import { Trash2 } from "lucide-react";
-import api from "@/lib/axios";
+import api from "@/services/axios";
 import { toast } from "sonner";
 import { useState } from "react";
 import handleKeyPress from "@/lib/handleKeyPress";
@@ -19,11 +19,11 @@ const TaskCard = ({ task, index, handleTaskChanged }) => {
   const deleteTask = async (taskId) => {
     try {
       await api.delete(`/tasks/${taskId}`);
-      toast.success(`Nhiệm vụ đã xoá.`);
+      toast.success(`Task is Deleted.`);
       handleTaskChanged();
     } catch (error) {
-      console.error("Lỗi xảy ra khi xoá task.", error);
-      console.error("Lỗi xảy ra khi xoá nhiệm vụ mới.");
+      console.error("ERROR when delete Task.", error);
+      console.error("ERROR when delete New Task.");
     }
   };
 
@@ -33,11 +33,11 @@ const TaskCard = ({ task, index, handleTaskChanged }) => {
       await api.put(`tasks/${task._id}`, {
         title: updateTaskTitle,
       });
-      toast.success(`Nhiệm vụ đã đổi thành ${updateTaskTitle}`);
+      toast.success(`Task become to ${updateTaskTitle}`);
       handleTaskChanged();
     } catch (error) {
-      console.error("Lỗi xảy ra khi update task.", error);
-      toast.error("Lỗi xảy ra khi cập nhập nhiệm vụ mới.");
+      console.error("ERROR when update task.", error);
+      toast.error("ERROW when update new task.");
     }
   };
 
@@ -48,19 +48,19 @@ const TaskCard = ({ task, index, handleTaskChanged }) => {
           status: "complete",
           completedAt: new Date().toISOString(),
         });
-        toast.success(`${task.title} đã hoàn thành.`);
+        toast.success(`${task.title} Completed.`);
       } else {
         await api.put(`/tasks/${task._id}`, {
           status: "active",
           completedAt: null,
         });
-        toast.success(`${task.title} đã đổi sang chưa hoàn thành.`);
+        toast.success(`${task.title} become to Active.`);
       }
 
       handleTaskChanged();
     } catch (error) {
-      console.error("Lỗi xảy ra khi update task.", error);
-      console.error("Lỗi xảy ra khi cập nhập nhiệm vụ.");
+      console.error("ERROW when update task.", error);
+      console.error("ERROW when update task.");
     }
   };
 
@@ -95,7 +95,7 @@ const TaskCard = ({ task, index, handleTaskChanged }) => {
         <div className="flex-1 min-w-0">
           {isEditting ? (
             <Input
-              placeholder="Cần phải làm gì?"
+              placeholder="What need to do?"
               className="flex-1 h-12 text-base border-border/50 focus:border-primary/50 focus:ring-primary/20"
               type="text"
               value={updateTaskTitle}
