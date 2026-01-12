@@ -96,15 +96,13 @@ const HomePage = () => {
       />
       {/* Your Content/Components */}
       <div className="container pt-8 mx-auto relative z-10">
+        <div className="flex justify-end">
+          {/* Log out Button  */}
+          <Logout />
+        </div>
         <div className="w-full max-w-2xl mx-auto space-y-6 p-6">
-          <div className="flex items-center">
-            {/* dau trang */}
-            <div className="flex-1">
-              <Header />
-            </div>
-            {/* Log out Button  */}
-            <Logout />
-          </div>
+          {/* dau trang */}
+          <Header />
           {/* tao nhiem vu  */}
           <AddTask handleNewTaskAdded={handleTaskChanged} />
           {/* thong ke va bo loc */}

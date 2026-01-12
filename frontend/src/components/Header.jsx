@@ -6,7 +6,7 @@ const Header = () => {
       <h1 className="text-4xl font-bold text-transparent bg-primary bg-clip-text">
         TodoX
       </h1>
-      <p className="text-muted-foreground">
+      <p className="text-muted-foreground max-[500px]:text-sm">
         Nothing is difficult, We only fear not doing it 💪
       </p>
     </div>

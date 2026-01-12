@@ -13,7 +13,7 @@ const StartsAndFilters = ({
   return (
     <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
       {/* phan thong ke */}
-      <div className="flex gap-3">
+      <div className="flex gap-3 max-[640px]:justify-center max-[640px]:w-full">
         <Badge
           variant="secondary"
           className="bg-white/50 text-accent-foreground border-info/20"
@@ -28,7 +28,7 @@ const StartsAndFilters = ({
         </Badge>
       </div>
       {/* [phan filter] */}
-      <div className="flex flex-col gap-2 sm:flex-row">
+      <div className="flex gap-2 sm:flex-row max-[640px]:justify-center max-[640px]:w-full">
         {Object.keys(FilterType).map((type) => (
           <Button
             key={type}
