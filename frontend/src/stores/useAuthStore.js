@@ -122,7 +122,6 @@ export const useAuthStore = create(
         } catch (error) {
           console.error("Refresh error:", error);
           get().clearState();
-          toast.error("Password is wrong. Please sign in again!");
         } finally {
           set({ loading: false });
         }
